@@ -1,0 +1,355 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta34.2.dtd" >
+   <PATCH nodename="C:\Users\Administrator\Documents\VJ_Cardboard\patch\squarefft.v4p" scrollx="0" scrolly="0" systemname="squarefft" filename="E:\VJ_Cardboard\patch\squarefft.v4p">
+   <BOUNDS type="Window" left="12615" top="2070" width="7080" height="6930">
+   </BOUNDS>
+   <PACK Name="addonpack" Version="34.1.0">
+   </PACK>
+   <NODE systemname="PhongPoint (EX9.Effect)" filename="%VVVV%\lib\nodes\effects\PhongPoint.fx" nodename="PhongPoint (EX9.Effect)" componentmode="Hidden" id="1">
+   <BOUNDS type="Node" left="420" top="2730" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   <PIN pinname="Mesh" visible="1">
+   </PIN>
+   <PIN pinname="Transform" visible="1">
+   </PIN>
+   <PIN pinname="Ambient Color" visible="1">
+   </PIN>
+   <PIN pinname="Diffuse Color" slicecount="1" values="|0.63234,0.63234,0.63234,1.00000|">
+   </PIN>
+   <PIN pinname="Specular Color" slicecount="1" values="|0.33237,0.33237,0.33237,1.00000|">
+   </PIN>
+   <PIN pinname="Light Attenuation 0" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Light Attenuation 1" slicecount="1" values="0.3">
+   </PIN>
+   <PIN pinname="Light Attenuation 2" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Light Position XYZ" slicecount="3" values="0,3.3,-2">
+   </PIN>
+   </NODE>
+   <NODE systemname="Renderer (EX9)" nodename="Renderer (EX9)" componentmode="Hidden" id="2">
+   <BOUNDS type="Node" left="420" top="3990" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="420" top="3990" width="2400" height="1800">
+   </BOUNDS>
+   <BOUNDS type="Window" left="1500" top="3090" width="6240" height="5085">
+   </BOUNDS>
+   <PIN pinname="Layers" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="View" visible="1">
+   </PIN>
+   <PIN pinname="Projection" visible="1">
+   </PIN>
+   <PIN pinname="EX9 Out" visible="1">
+   </PIN>
+   <PIN pinname="Backbuffer Width" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Backbuffer Height" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <NODE systemname="Box (EX9.Geometry)" nodename="Box (EX9.Geometry)" componentmode="Hidden" id="3">
+   <BOUNDS type="Node" left="585" top="2235" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Mesh" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="3" srcpinname="Mesh" dstnodeid="1" dstpinname="Mesh">
+   </LINK>
+   <NODE systemname="Scale (Transform)" nodename="Scale (Transform)" componentmode="Hidden" id="4">
+   <BOUNDS type="Node" left="735" top="1815" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Transform Out" visible="1">
+   </PIN>
+   <PIN pinname="X" visible="1">
+   </PIN>
+   <PIN pinname="Y" visible="1">
+   </PIN>
+   <PIN pinname="Z" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="4" srcpinname="Transform Out" dstnodeid="1" dstpinname="Transform">
+   </LINK>
+   <NODE systemname="FFT (DShow9 4Channels)" filename="%VVVV%\lib\nodes\modules\DShow9\FFT (DShow9 4Channels).v4p" nodename="FFT (DShow9 4Channels)" componentmode="Hidden" id="5">
+   <BOUNDS type="Node" left="840" top="360" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="BassOut" visible="1">
+   </PIN>
+   <PIN pinname="HighOut" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="Multiply (Value)" nodename="Multiply (Value)" componentmode="Hidden" id="6">
+   <BOUNDS type="Node" left="990" top="780" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input 2" slicecount="1" values="20">
+   </PIN>
+   <PIN pinname="Input 1" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="Add (Value)" nodename="Add (Value)" componentmode="Hidden" id="7">
+   <BOUNDS type="Node" left="1005" top="1185" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input 2" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Input 1" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="5" srcpinname="BassOut" dstnodeid="6" dstpinname="Input 1">
+   </LINK>
+   <LINK srcnodeid="6" srcpinname="Output" dstnodeid="7" dstpinname="Input 1">
+   </LINK>
+   <LINK srcnodeid="7" srcpinname="Output" dstnodeid="4" dstpinname="X">
+   </LINK>
+   <LINK srcnodeid="7" srcpinname="Output" dstnodeid="4" dstpinname="Y">
+   </LINK>
+   <LINK srcnodeid="7" srcpinname="Output" dstnodeid="4" dstpinname="Z">
+   </LINK>
+   <NODE systemname="HSV (Color Join)" nodename="HSV (Color Join)" componentmode="Hidden" id="8">
+   <BOUNDS type="Node" left="1485" top="2265" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Saturation" slicecount="1" values="0.6">
+   </PIN>
+   <PIN pinname="Hue" slicecount="1" visible="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="8" srcpinname="Output" dstnodeid="1" dstpinname="Ambient Color">
+   </LINK>
+   <NODE systemname="CAMERA (TRANSFORM SOFTIMAGE)" filename="%VVVV%\lib\nodes\modules\Transform\Camera (Transform Softimage).v4p" nodename="Camera (Transform Softimage)" componentmode="Hidden" id="9">
+   <BOUNDS type="Node" left="1365" top="3675" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="View" visible="1">
+   </PIN>
+   <PIN pinname="Projection" visible="1">
+   </PIN>
+   <PIN pinname="Initial FOV" slicecount="1" values="0.04">
+   </PIN>
+   <PIN pinname="Initial Yaw" slicecount="1" visible="1" values="0.13">
+   </PIN>
+   <PIN pinname="Initial Distance" slicecount="1" values="15">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="9" srcpinname="View" dstnodeid="2" dstpinname="View">
+   </LINK>
+   <LINK srcnodeid="9" srcpinname="Projection" dstnodeid="2" dstpinname="Projection">
+   </LINK>
+   <NODE systemname="DX9Texture (EX9.Texture)" nodename="DX9Texture (EX9.Texture)" componentmode="Hidden" id="10">
+   <BOUNDS type="Node" left="1875" top="4380" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Source" visible="1">
+   </PIN>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="2" srcpinname="EX9 Out" dstnodeid="10" dstpinname="Source">
+   </LINK>
+   <NODE systemname="FullscreenQuad (DX9)" filename="%VVVV%\addonpack\lib\nodes\modules\TextureFX\misc\FullscreenQuad (DX9).v4p" nodename="FullscreenQuad (DX9)" componentmode="Hidden" id="12">
+   <BOUNDS type="Node" left="1890" top="5115" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Texture" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   <PIN pinname="Enabled" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="Renderer (EX9)" nodename="Renderer (EX9)" componentmode="Hidden" id="13">
+   <BOUNDS type="Node" left="1890" top="5550" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1890" top="5550" width="2400" height="1800">
+   </BOUNDS>
+   <BOUNDS type="Window" left="0" top="0" width="12180" height="11175">
+   </BOUNDS>
+   <PIN pinname="Layers" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="12" srcpinname="Layer" dstnodeid="13" dstpinname="Layers">
+   </LINK>
+   <NODE systemname="Glow (EX9.Texture Filter)" filename="%VVVV%\addonpack\lib\nodes\modules\TextureFX\Filter\Glow\Glow (EX9.Texture Filter).v4p" nodename="Glow (EX9.Texture Filter)" componentmode="Hidden" id="18">
+   <BOUNDS type="Node" left="1875" top="4755" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="GlowAmount" slicecount="1" values="3.5">
+   </PIN>
+   <PIN pinname="GlowRadius" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="GlowSaturation" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="PreBlurWidth" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Evaluate" slicecount="1" values="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="10" srcpinname="Texture Out" dstnodeid="18" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="18" srcpinname="Output" dstnodeid="12" dstpinname="Texture">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="19" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="1500" top="1530" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="1500" top="1530" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="color">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="19" srcpinname="Y Output Value" dstnodeid="8" dstpinname="Hue">
+   </LINK>
+   <NODE systemname="LFO (Animation)" nodename="LFO (Animation)" componentmode="Hidden" id="20">
+   <BOUNDS type="Node" left="1575" top="3225" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Period" slicecount="1" values="15">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="20" srcpinname="Output" dstnodeid="9" dstpinname="Initial Yaw">
+   </LINK>
+   <NODE systemname="Group (EX9)" nodename="Group (EX9)" componentmode="Hidden" id="23">
+   <BOUNDS type="Node" left="435" top="3300" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   <PIN pinname="Layer 1" visible="1">
+   </PIN>
+   <PIN pinname="Layer 2" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Layer Template Count" slicecount="1" values="3">
+   </PIN>
+   <PIN pinname="Layer 3" visible="1" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="23" srcpinname="Layer" dstnodeid="2" dstpinname="Layers">
+   </LINK>
+   <LINK srcnodeid="1" srcpinname="Layer" dstnodeid="23" dstpinname="Layer 1">
+   </LINK>
+   <NODE systemname="Torus (EX9.Geometry)" nodename="Torus (EX9.Geometry)" componentmode="Hidden" id="24">
+   <BOUNDS type="Node" left="3885" top="2310" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Mesh" visible="1">
+   </PIN>
+   <PIN pinname="Resolution X" slicecount="1" values="30">
+   </PIN>
+   <PIN pinname="Radius 1" slicecount="1" values="0.01">
+   </PIN>
+   <PIN pinname="Radius 2" slicecount="1" visible="1" values="1">
+   </PIN>
+   <PIN pinname="Resolution Y" slicecount="1" values="30">
+   </PIN>
+   </NODE>
+   <NODE systemname="PhongPoint (EX9.Effect)" filename="%VVVV%\lib\nodes\effects\PhongPoint.fx" nodename="PhongPoint (EX9.Effect)" componentmode="Hidden" id="28">
+   <BOUNDS type="Node" left="3735" top="2745" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   <PIN pinname="Mesh" visible="1">
+   </PIN>
+   <PIN pinname="Transform" visible="1">
+   </PIN>
+   <PIN pinname="Ambient Color" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="28" srcpinname="Layer" dstnodeid="23" dstpinname="Layer 2">
+   </LINK>
+   <LINK srcnodeid="24" srcpinname="Mesh" dstnodeid="28" dstpinname="Mesh">
+   </LINK>
+   <NODE systemname="Transform (Transform 3d)" nodename="Transform (Transform 3d)" componentmode="Hidden" id="29">
+   <BOUNDS type="Node" left="4065" top="1815" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Transform Out" visible="1">
+   </PIN>
+   <PIN pinname="TranslateX" visible="1" slicecount="3" values="0,0,0">
+   </PIN>
+   <PIN pinname="TranslateY" visible="1" slicecount="3" values="0.5,0,-0.35">
+   </PIN>
+   <PIN pinname="TranslateZ" visible="1" slicecount="2" values="0,0">
+   </PIN>
+   <PIN pinname="ScaleX" slicecount="2" values="1,1">
+   </PIN>
+   <PIN pinname="Yaw" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Roll" slicecount="3" values="-0.1,0.1,0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="29" srcpinname="Transform Out" dstnodeid="28" dstpinname="Transform">
+   </LINK>
+   <NODE systemname="Add (Value)" nodename="Add (Value)" componentmode="Hidden" id="30">
+   <BOUNDS type="Node" left="4095" top="1215" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Input 2" slicecount="1" values="0.8">
+   </PIN>
+   <PIN pinname="Input 1" visible="1" slicecount="1" values="0.0382612996273489">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="30" srcpinname="Output" dstnodeid="24" dstpinname="Radius 2">
+   </LINK>
+   <NODE systemname="Multiply (Value)" nodename="Multiply (Value)" componentmode="Hidden" id="31">
+   <BOUNDS type="Node" left="4110" top="840" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Input 2" slicecount="1" values="10">
+   </PIN>
+   <PIN pinname="Input 1" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="31" srcpinname="Output" dstnodeid="30" dstpinname="Input 1">
+   </LINK>
+   <LINK srcnodeid="5" srcpinname="HighOut" dstnodeid="31" dstpinname="Input 1">
+   </LINK>
+   <NODE systemname="HSV (Color Join)" nodename="HSV (Color Join)" componentmode="Hidden" id="34">
+   <BOUNDS type="Node" left="4800" top="2295" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="34" srcpinname="Output" dstnodeid="28" dstpinname="Ambient Color">
+   </LINK>
+   <NODE systemname="IOBox (Node)" nodename="IOBox (Node)" componentmode="InABox" id="39">
+   <BOUNDS type="Node" left="3900" top="5550" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="3900" top="5550" width="1695" height="285">
+   </BOUNDS>
+   <PIN pinname="Input Node" visible="1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Square">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="12" srcpinname="Layer" dstnodeid="39" dstpinname="Input Node">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="40" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="3165" top="4185" width="480" height="480">
+   </BOUNDS>
+   <BOUNDS type="Node" left="3165" top="4185" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="1">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Boolean">
+   </PIN>
+   <PIN pinname="Behavior" slicecount="1" values="Toggle">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="enable">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="40" srcpinname="Y Output Value" dstnodeid="12" dstpinname="Enabled">
+   </LINK>
+   </PATCH>
